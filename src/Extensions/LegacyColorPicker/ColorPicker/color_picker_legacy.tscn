@@ -1,0 +1,156 @@
+[gd_scene load_steps=8 format=3 uid="uid://d6svaskyvogx"]
+
+[ext_resource type="Texture2D" uid="uid://tqkhqnx1exo1" path="res://src/Extensions/LegacyColorPicker/Assets/color_switch.png" id="1_fknpb"]
+[ext_resource type="Script" path="res://src/Extensions/LegacyColorPicker/ColorPicker/color_picker_legacy.gd" id="1_qe8ca"]
+[ext_resource type="Texture2D" uid="uid://b6xa0ed2h4wva" path="res://src/Extensions/LegacyColorPicker/Assets/move_arrow.png" id="2_uk416"]
+[ext_resource type="Shader" path="res://src/Extensions/LegacyColorPicker/Assets/TransparentChecker.gdshader" id="3_a5m7r"]
+[ext_resource type="Texture2D" uid="uid://c5ccl00r6wphm" path="res://src/Extensions/LegacyColorPicker/Assets/color_defaults.png" id="3_qk8sv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_on6wq"]
+shader = ExtResource("3_a5m7r")
+shader_parameter/size = 10.0
+shader_parameter/alpha = 1.0
+shader_parameter/color1 = Color(0.7, 0.7, 0.7, 1)
+shader_parameter/color2 = Color(1, 1, 1, 1)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/scale = Vector2(0, 0)
+shader_parameter/rect_size = Vector2(0, 0)
+shader_parameter/follow_movement = false
+shader_parameter/follow_scale = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ug1he"]
+
+[node name="LegacyColorPickers" type="PanelContainer"]
+offset_right = 318.0
+offset_bottom = 62.0
+script = ExtResource("1_qe8ca")
+
+[node name="ColorPickersHorizontal" type="HBoxContainer" parent="."]
+layout_mode = 2
+tooltip_text = "Choose a color for the left tool"
+theme_override_constants/separation = 13
+alignment = 1
+
+[node name="LeftColorPickerButton" type="ColorPickerButton" parent="ColorPickersHorizontal"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+tooltip_text = "Choose a color for the left tool"
+mouse_default_cursor_shape = 2
+
+[node name="ColorButtonsVertical" type="VBoxContainer" parent="ColorPickersHorizontal"]
+layout_mode = 2
+alignment = 1
+
+[node name="ColorSwitch" type="TextureButton" parent="ColorPickersHorizontal/ColorButtonsVertical"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "Switch left and right colors."
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("1_fknpb")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorPickersHorizontal/ColorButtonsVertical"]
+layout_mode = 2
+
+[node name="ToLeft" type="Button" parent="ColorPickersHorizontal/ColorButtonsVertical/HBoxContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="ColorPickersHorizontal/ColorButtonsVertical/HBoxContainer/ToLeft"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_uk416")
+flip_h = true
+
+[node name="Line1" type="HSeparator" parent="ColorPickersHorizontal/ColorButtonsVertical/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CopyAverage" type="Button" parent="ColorPickersHorizontal/ColorButtonsVertical/HBoxContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+
+[node name="TransparentChecker" type="ColorRect" parent="ColorPickersHorizontal/ColorButtonsVertical/HBoxContainer/CopyAverage"]
+material = SubResource("ShaderMaterial_on6wq")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="AverageColor" type="ColorRect" parent="ColorPickersHorizontal/ColorButtonsVertical/HBoxContainer/CopyAverage"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_ug1he")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.5
+offset_top = -10.5
+offset_right = 10.5
+offset_bottom = 10.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Line2" type="HSeparator" parent="ColorPickersHorizontal/ColorButtonsVertical/HBoxContainer"]
+layout_mode = 2
+
+[node name="ToRight" type="Button" parent="ColorPickersHorizontal/ColorButtonsVertical/HBoxContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="ColorPickersHorizontal/ColorButtonsVertical/HBoxContainer/ToRight"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_uk416")
+
+[node name="ColorDefaults" type="TextureButton" parent="ColorPickersHorizontal/ColorButtonsVertical"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "Reset the colors to their default state (black for left, white for right)"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("3_qk8sv")
+
+[node name="RightColorPickerButton" type="ColorPickerButton" parent="ColorPickersHorizontal"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+tooltip_text = "Choose a color for the right tool"
+mouse_default_cursor_shape = 2
+
+[connection signal="color_changed" from="ColorPickersHorizontal/LeftColorPickerButton" to="." method="_on_left_color_picker_button_color_changed"]
+[connection signal="pressed" from="ColorPickersHorizontal/ColorButtonsVertical/ColorSwitch" to="." method="_on_color_switch_pressed"]
+[connection signal="pressed" from="ColorPickersHorizontal/ColorButtonsVertical/HBoxContainer/ToLeft" to="." method="_on_to_left_pressed"]
+[connection signal="pressed" from="ColorPickersHorizontal/ColorButtonsVertical/HBoxContainer/CopyAverage" to="." method="_on_copy_average_pressed"]
+[connection signal="pressed" from="ColorPickersHorizontal/ColorButtonsVertical/HBoxContainer/ToRight" to="." method="_on_to_right_pressed"]
+[connection signal="pressed" from="ColorPickersHorizontal/ColorButtonsVertical/ColorDefaults" to="." method="_on_color_defaults_pressed"]
+[connection signal="color_changed" from="ColorPickersHorizontal/RightColorPickerButton" to="." method="_on_right_color_picker_button_color_changed"]

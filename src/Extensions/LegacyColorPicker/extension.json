@@ -1,0 +1,10 @@
+{
+"author": "Variable",
+"description": "0.x version of the ColorPicker",
+"display_name": "Legacy (pre 1.0) ColorPicker",
+"license": "MIT",
+"name": "LegacyColorPicker",
+"nodes": ["Main.tscn"],
+"supported_api_versions": [5],
+"version": "0.1"
+}
