@@ -16,6 +16,10 @@ func update_ui(color_info, button: int):
 
 	if typeof(color_info) == TYPE_COLOR:  # Pixelorama 1.0.5 and below
 		tool_color["color"] = color_info
+	elif typeof(color_info) == TYPE_DICTIONARY:
+		tool_color = color_info
+	else:
+		print("invalid color_info value (Expected Dictionary or color)")
 
 	match button:
 		MOUSE_BUTTON_LEFT:
