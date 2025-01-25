@@ -5,10 +5,17 @@ var tools_autoload: Node
 @onready var right_color_picker_button: ColorPickerButton = %RightColorPickerButton
 @onready var average_color: ColorRect = %AverageColor
 
+
 func _ready() -> void:
 	## NOTE: use get_node_or_null("/root/ExtensionsApi") to access api.
 	tools_autoload = get_node_or_null("/root/Tools")
 	tools_autoload.color_changed.connect(update_ui)
+
+	var left_slot = tools_autoload._slots.get(MOUSE_BUTTON_LEFT, null)
+	var right_slot = tools_autoload._slots.get(MOUSE_BUTTON_RIGHT, null)
+	if left_slot and right_slot:
+		left_color_picker_button.color = left_slot.color
+		right_color_picker_button.color = right_slot.color
 
 
 func update_ui(color_info, button: int):
