@@ -1,10 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://d6svaskyvogx"]
+[gd_scene load_steps=10 format=3 uid="uid://d6svaskyvogx"]
 
 [ext_resource type="Texture2D" uid="uid://tqkhqnx1exo1" path="res://src/Extensions/LegacyColorPicker/Assets/color_switch.png" id="1_fknpb"]
-[ext_resource type="Script" path="res://src/Extensions/LegacyColorPicker/ColorPicker/color_picker_legacy.gd" id="1_qe8ca"]
+[ext_resource type="Script" uid="uid://2vl7t4sembo8" path="res://src/Extensions/LegacyColorPicker/ColorPicker/color_picker_legacy.gd" id="1_qe8ca"]
 [ext_resource type="Texture2D" uid="uid://b6xa0ed2h4wva" path="res://src/Extensions/LegacyColorPicker/Assets/move_arrow.png" id="2_uk416"]
-[ext_resource type="Shader" path="res://src/Extensions/LegacyColorPicker/Assets/TransparentChecker.gdshader" id="3_a5m7r"]
+[ext_resource type="Shader" uid="uid://d3a845irc504a" path="res://src/Extensions/LegacyColorPicker/Assets/TransparentChecker.gdshader" id="3_a5m7r"]
 [ext_resource type="Texture2D" uid="uid://c5ccl00r6wphm" path="res://src/Extensions/LegacyColorPicker/Assets/color_defaults.png" id="3_qk8sv"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_slqk0"]
+action = &"switch_colors"
+
+[sub_resource type="Shortcut" id="Shortcut_7jxiu"]
+events = [SubResource("InputEventAction_slqk0")]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_on6wq"]
 shader = ExtResource("3_a5m7r")
@@ -45,11 +51,13 @@ layout_mode = 2
 alignment = 1
 
 [node name="ColorSwitch" type="TextureButton" parent="ColorPickersHorizontal/ColorButtonsVertical"]
+unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
-tooltip_text = "Switch left and right colors."
+tooltip_text = "Switch left and right colors"
 mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_7jxiu")
 texture_normal = ExtResource("1_fknpb")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ColorPickersHorizontal/ColorButtonsVertical"]
@@ -58,6 +66,8 @@ layout_mode = 2
 [node name="ToLeft" type="Button" parent="ColorPickersHorizontal/ColorButtonsVertical/HBoxContainer"]
 custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
+tooltip_text = "Interpolate the (Left Color)
+towards the (Right Color)"
 
 [node name="TextureRect" type="TextureRect" parent="ColorPickersHorizontal/ColorButtonsVertical/HBoxContainer/ToLeft"]
 texture_filter = 1
@@ -115,6 +125,8 @@ layout_mode = 2
 [node name="ToRight" type="Button" parent="ColorPickersHorizontal/ColorButtonsVertical/HBoxContainer"]
 custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
+tooltip_text = "Interpolate the (Right Color)
+towards the (Left Color)"
 
 [node name="TextureRect" type="TextureRect" parent="ColorPickersHorizontal/ColorButtonsVertical/HBoxContainer/ToRight"]
 texture_filter = 1

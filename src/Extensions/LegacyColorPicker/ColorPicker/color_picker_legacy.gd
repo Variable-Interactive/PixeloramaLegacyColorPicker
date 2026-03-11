@@ -4,10 +4,12 @@ var tools_autoload: Node
 @onready var left_color_picker_button: ColorPickerButton = %LeftColorPickerButton
 @onready var right_color_picker_button: ColorPickerButton = %RightColorPickerButton
 @onready var average_color: ColorRect = %AverageColor
+@onready var color_switch: TextureButton = %ColorSwitch
 
 
 func _ready() -> void:
 	## NOTE: use get_node_or_null("/root/ExtensionsApi") to access api.
+	color_switch.add_to_group("UIButtons")
 	tools_autoload = get_node_or_null("/root/Tools")
 	tools_autoload.color_changed.connect(update_ui)
 
@@ -16,6 +18,7 @@ func _ready() -> void:
 	if left_slot and right_slot:
 		left_color_picker_button.color = left_slot.color
 		right_color_picker_button.color = right_slot.color
+		_average()
 
 
 func update_ui(color_info, button: int):
